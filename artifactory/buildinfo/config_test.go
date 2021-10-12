@@ -112,10 +112,8 @@ func TestExclude(t *testing.T) {
 			input: map[string]string{
 				"USER": "jfrog",
 			},
-			expected: map[string]string{
-				"USER": "jfrog",
-			},
-			expectError: false,
+			expected:    nil,
+			expectError: true,
 		},
 		{
 			description: "input with bad matching pattern",
