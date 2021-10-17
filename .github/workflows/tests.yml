@@ -4,10 +4,10 @@ jobs:
   JFrog-Client-Go-Tests:
     name: ${{ matrix.product }}-Test
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         product: [artifactory, distribution, xray, pipelines, access]
-        fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
     - name: Install Go
