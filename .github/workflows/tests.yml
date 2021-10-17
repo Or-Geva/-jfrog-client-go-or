@@ -2,7 +2,7 @@ name: JFrog Client Go Tests
 on: [push]
 jobs:
   JFrog-Client-Go-Tests:
-    name: ${{ matrix.product }}-Test
+    name: ${{ matrix.product }} (${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
