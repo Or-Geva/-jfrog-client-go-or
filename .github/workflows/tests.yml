@@ -1,7 +1,8 @@
 name: JFrog Client Go Tests
 on: [push]
 jobs:
-  ${{ matrix.product }}-Tests:
+  JFrog-Client-Go-Tests:
+    name: ${{ matrix.product }}-Test
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
