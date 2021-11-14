@@ -1629,9 +1629,3 @@ integrations, err := pipelinesManager.GetAllIntegrations()
 integrationId := 1234
 err := pipelinesManager.DeleteIntegration(integrationId)
 ```
-
-#### Add Pipeline Source
-```go
-projectIntegrationId := 1234
-err := pipelinesManager.AddSource(projectIntegrationId, "domain/repo", "master", "pipelines.yml")
-```
