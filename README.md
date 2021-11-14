@@ -1624,11 +1624,7 @@ integration, err := pipelinesManager.GetIntegrationByName("integrationName")
 integrations, err := pipelinesManager.GetAllIntegrations()
 ```
 
-#### Delete Integration
-```go
-integrationId := 1234
-err := pipelinesManager.DeleteIntegration(integrationId)
-```
+
 
 #### Add Pipeline Source
 ```go
