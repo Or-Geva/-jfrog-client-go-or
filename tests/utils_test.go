@@ -14,7 +14,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/uuid"
 	buildinfo "github.com/jfrog/build-info-go/entities"
 
 	accessAuth "github.com/jfrog/jfrog-client-go/access/auth"
@@ -64,6 +63,7 @@ var (
 	PipelinesVcsBranch       *string
 	AccessUrl                *string
 	AccessToken              *string
+	ciRunId                  *string
 
 	// Artifactory services
 	testsUploadService                    *services.UploadService
@@ -113,25 +113,28 @@ var (
 	// Access Services
 	testsAccessProjectService *accessServices.ProjectService
 
-	timestamp    = time.Now().Unix()
-	trueValue    = true
-	falseValue   = false
-	runTimestamp = strconv.FormatInt(int64(timestamp), 10)
+	timestamp  = time.Now().Unix()
+	trueValue  = true
+	falseValue = false
+	runId      = strconv.FormatInt(int64(timestamp), 10)
 
 	// Tests configuration
-	RtTargetRepo    = JfrogRepoPrefix + "-client"
+	RtTargetRepo    = "client-tests-"
 	RtTargetRepoKey = RtTargetRepo
 )
 
 const (
-	JfrogRepoPrefix                  = "jf"
 	SpecsTestRepositoryConfig        = "specs_test_repository_config.json"
 	RepoDetailsUrl                   = "api/repositories/"
 	HttpClientCreationFailureMessage = "Failed while attempting to create HttpClient: %s"
 )
 
 func init() {
-	RtTargetRepoKey = RtTargetRepo + strings.Replace(uuid.New().String(), "-", "", -1)[:5] + "-" + runTimestamp
+	ciRunId = flag.String("test.ciRunId", "", "CI Run ID")
+	if ciRunId != nil && *ciRunId != "" {
+		runId = *ciRunId
+	}
+	RtTargetRepoKey = RtTargetRepo + "-" + runId
 	RtTargetRepo = RtTargetRepoKey + "/"
 	TestArtifactory = flag.Bool("test.artifactory", false, "Test Artifactory")
 	TestDistribution = flag.Bool("test.distribution", false, "Test distribution")
