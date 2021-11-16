@@ -9,7 +9,7 @@ on:
     types: [labeled]
 jobs:
   JFrog-Client-Go-Tests:
-    if: ${{ github.event.label.name == 'safe to test' }}
+    if: contains(github.event.pull_request.labels.*.name, 'safe to test') || github.event_name == 'push'
     name: ${{ matrix.suite }} ${{ matrix.os }}
     strategy:
       fail-fast: false
