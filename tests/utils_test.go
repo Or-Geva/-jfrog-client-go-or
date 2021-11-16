@@ -119,7 +119,7 @@ var (
 	falseValue   = false
 
 	// Tests configuration
-	RtTargetRepo    = "client-go"
+	RtTargetRepo    = "or"
 	RtTargetRepoKey = RtTargetRepo
 )
 
