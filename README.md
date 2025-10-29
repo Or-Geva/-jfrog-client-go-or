@@ -7,6 +7,7 @@
 
 ## Table of Contents
 
+
 - [jfrog-client-go](#jfrog-client-go)
   - [Table of Contents](#table-of-contents)
   - [General](#general)
