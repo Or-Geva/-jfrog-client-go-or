@@ -172,6 +172,29 @@ func TestIsWildcardParentheses(t *testing.T) {
 	}
 }
 
+func TestGetRootPath(t *testing.T) {
+	// WildcardPattern: Stop at first section containing '*'
+	got := GetRootPath("a/b/*.txt", WildCardPattern, ParenthesesSlice{})
+	want := "a/b"
+	if got != want {
+		t.Errorf("GetRootPath(a/b/*.txt) == %s, want %s", got, want)
+	}
+
+	// WildcardPattern: Stop at first section containing '**'
+	got = GetRootPath("a/**/b.txt", WildCardPattern, ParenthesesSlice{})
+	want = "a"
+	if got != want {
+		t.Errorf("GetRootPath(a/**/b.txt) == %s, want %s", got, want)
+	}
+
+	// AntPattern: Stop at first section containing '?'
+	got = GetRootPath("a/b?/c.txt", AntPattern, ParenthesesSlice{})
+	want = "a"
+	if got != want {
+		t.Errorf("GetRootPath(a/b?/c.txt) == %s, want %s", got, want)
+	}
+}
+
 func TestAntPathToRegExp(t *testing.T) {
 	var fileSystemPaths []string = []string{
 		filepath.Join("dev", "a", "b.txt"),
