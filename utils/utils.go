@@ -91,7 +91,6 @@ func GetRootPath(path string, patternType PatternType, parentheses ParenthesesSl
 		}
 		if section == "~" {
 			rootPath += GetUserHomeDir()
-			rootPath += GetUserHomeDir()
 		} else {
 			rootPath += section
 		}
@@ -235,11 +234,15 @@ func getFileSeparator() string {
 
 // Replaces matched regular expression from path to corresponding placeholder {i} at target.
 // Example 1:
-//      pattern = "repoA/1(.*)234" ; path = "repoA/1hello234" ; target = "{1}" ; ignoreRepo = false
-//      returns "hello"
+//
+//	pattern = "repoA/1(.*)234" ; path = "repoA/1hello234" ; target = "{1}" ; ignoreRepo = false
+//	returns "hello"
+//
 // Example 2:
-//      pattern = "repoA/1(.*)234" ; path = "repoB/1hello234" ; target = "{1}" ; ignoreRepo = true
-//      returns "hello"
+//
+//	pattern = "repoA/1(.*)234" ; path = "repoB/1hello234" ; target = "{1}" ; ignoreRepo = true
+//	returns "hello"
+//
 // return (parsed target, placeholders replaced in target, error)
 func BuildTargetPath(pattern, path, target string, ignoreRepo bool) (string, bool, error) {
 	asteriskIndex := strings.Index(pattern, "*")
