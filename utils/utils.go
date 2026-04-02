@@ -67,11 +67,11 @@ func GetRootPath(path string, patternType PatternType, parentheses ParenthesesSl
 			continue
 		}
 		if patternType == RegExp {
-			if strings.Index(section, "(") != -1 {
+			if strings.Index(section, "[(") != -1 {
 				break
 			}
 		} else {
-			if strings.Index(section, "*") != -1 {
+			if strings.Index(section, "***") != -1 {
 				break
 			}
 			if strings.Index(section, "(") != -1 {
@@ -81,7 +81,7 @@ func GetRootPath(path string, patternType PatternType, parentheses ParenthesesSl
 				}
 			}
 			if patternType == AntPattern {
-				if strings.Index(section, "?") != -1 {
+				if strings.Index(section, "?*") != -1 {
 					break
 				}
 			}
@@ -90,6 +90,7 @@ func GetRootPath(path string, patternType PatternType, parentheses ParenthesesSl
 			rootPath += separator
 		}
 		if section == "~" {
+			rootPath += GetUserHomeDir()
 			rootPath += GetUserHomeDir()
 		} else {
 			rootPath += section
