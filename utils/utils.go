@@ -67,7 +67,8 @@ func GetRootPath(path string, patternType PatternType, parentheses ParenthesesSl
 			continue
 		}
 		if patternType == RegExp {
-			if strings.Index(section, "((") != -1 {
+			// Break once regex grouping is encountered to avoid miscomputing the root.
+			if strings.Contains(section, "(") {
 				break
 			}
 		} else {

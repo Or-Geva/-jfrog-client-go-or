@@ -172,6 +172,22 @@ func TestIsWildcardParentheses(t *testing.T) {
 	}
 }
 
+func TestGetRootPath_RegExpBreakOnGrouping(t *testing.T) {
+	got := GetRootPath("foo/bar/(.*)/baz", RegExp, ParenthesesSlice{})
+	want := "foo/bar"
+	if got != want {
+		t.Errorf("GetRootPath(RegExp) == %s, want %s", got, want)
+	}
+}
+
+func TestGetRootPath_RegExpNoGroupingReturnsFullPath(t *testing.T) {
+	got := GetRootPath("foo/bar/baz", RegExp, ParenthesesSlice{})
+	want := "foo/bar/baz"
+	if got != want {
+		t.Errorf("GetRootPath(RegExp) == %s, want %s", got, want)
+	}
+}
+
 func TestAntPathToRegExp(t *testing.T) {
 	var fileSystemPaths []string = []string{
 		filepath.Join("dev", "a", "b.txt"),
